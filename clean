@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+find . \( \
+     -name "*.aux" -type f -o \
+     -name "*.log" -type f \) \
+     -exec rm -rvf {} +

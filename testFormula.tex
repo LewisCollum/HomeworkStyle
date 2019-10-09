@@ -1,0 +1,152 @@
+\documentclass[letterpaper, 10pt]{article}
+\usepackage{formula}
+\usepackage{graphicx}
+
+\begin{document}
+\scriptsize
+\begin{multicols*}{4}
+
+  \section{Symbols}
+  
+  \begin{tabularx}{\linewidth}{l X}
+    $c$ & Speed of light ($3\times10^8$ m/s). \\
+    $\omega$ & Angular velocity (m/s). \\
+    $u$ & Phase velocity (m/s). \\
+    $\gamma$ & (Complex) propogati on constant.\\
+    $\beta$ & Phase constant, also called ``wavenumber'' (rad/m). \\
+    $\alpha$ & Attenuation constant. \\
+    $\phi$ & Phase. \\
+    $\phi_0$ & Phase offset. If positive, wave leads (left-shifted). If negative, wave lags (right-shifted). \\
+    $e^{-\alpha x}$ & Attenuation factor $+x$ direction (in a lossy medium). \\
+    $Z_0$ & Characteristic impedance ($\Omega$). \\
+    $Z_{\text{L}}$ & Load impedance. \\
+    $z_{\text{L}}$ & Normalized load impedance [eq \eqref{normalizedLoadImpedance}]. \\
+    $\Gamma$ & Voltage reflection coefficient. The amplitudes of the reflected and incident voltage waves at the load.\\
+    $L'$ & The combined inductance of both conductors per unit length, in H/m. \\
+    $G'$ & The conductance of the insulation medium between the two
+    conductors per unit length, in S/m. \\
+    $C'$ & The capacitance of the two conductors per unit length in, F/m. \\
+    $R'$ & The combined resistance of both conductors per unit length, in $\Omega$/m. \\
+    $\epsilon$ & Permittivity (dielectric insulator). \\
+    $\epsilon_0$ & Permittivity of free space ($8.854\times 10^{-12}$ F/m). \\
+    $\epsilon_{\text{r}}$ & Relative permittivity. \\
+    $\epsilon_{\text{eff}}$ & Effective relative permittivity. \\
+    $\mu$ & Permeability (dielectric insulator). \\
+    $\mu_0$ & Permeability of free space ($4\pi\times 10^{-7}$ H/m). \\
+    $\mu_c$ & Permeability of conducting strip. \\
+    $\sigma$ & Conductivity (dielectric insulator). \\
+    $\sigma_c$ & Conductivity of conducting strip. \\
+  \end{tabularx}
+  
+  \section{Equations}
+  
+  \[\label{eq:angularVelocity}
+    \omega = 2\pi f = \frac{2\pi}{T}\]
+  
+  \[\label{eq:phaseConstLambda}\beta = \frac{2\pi}{\lambda}\]
+
+  \[\label{eq:phaseVelocity}
+    u_p = \frac{\lambda}{T} = f\lambda = \frac{\omega}{\beta}\]
+
+  \[\phi(x, t) = \omega t - \beta x + \phi_0\]
+
+  \[y(x, t) = A\cos(\phi(x, t))\] 
+
+  \[e^{j\theta}=\cos(\theta) + j\sin(\theta)
+    \eqd{Euler's Identity}\]
+
+  \[\label{eq:telegraphers}
+    \begin{aligned}
+      &\frac{d\tilde{V}(z)}{dz} = -(R' + j\omega L')\tilde{I}(z) \\
+      &\frac{d\tilde{I}(z)}{dz} = -(G' + j\omega C')\tilde{V}(z)
+    \end{aligned} \eqd{Telegrapher's equations}\]
+  
+  \[\gamma = \sqrt{(R'+j\omega L')(G'+j\omega C')} =\alpha+j\beta\] 
+
+  \[\alpha = \Re(\gamma); \ \beta = \Im(\gamma)\]
+
+  \[\label{eq:wave}
+    \begin{aligned}
+      &\frac{d^2\tilde{I}(z)}{dz^2}-\gamma^2\tilde{I}(z) = 0 \\
+      &\frac{d^2\tilde{V}(z)}{dz^2}-\gamma^2\tilde{V}(z) = 0
+    \end{aligned}\eqd{Wave equations}\]
+  
+  \[\label{eq:characterImpedance}
+    Z_0=\frac{R'+j\omega L'}{\gamma} = \sqrt{\frac{R'+j\omega L'}{G'+j\omega C'}} = \frac{V_0^+}{I_0^+}=\frac{-V_0^-}{I_0^-}\]
+
+  \[\label{eq:voltageReflection}\begin{aligned}
+      \Gamma&=\frac{V_0^-}{V_0^+}=\frac{Z_{\text{L}}-Z_0}{Z_{\text{L}}+Z_0}=\frac{Z_{\text{L}}/Z_0-1}{Z_{\text{L}}/Z_0+1} \\
+      &=\frac{z_{\text{L}} -1}{z_{\text{L}}+1} \end{aligned} \]
+
+  \[\label{normalizedLoadImpedance} z_{\text{L}} = \frac{Z_{\text{L}}}{Z_0} \]
+
+  \[V_0^+=|V_0^+|e^{j\phi^+}; \ V_0^-=|V_0^-|e^{j\phi^-}\]
+
+  \[\label{eq:instantVoltage}\begin{aligned}
+      v(x, t)&=\Re(\tilde{V}(x)e^{j\omega t}) \\
+      &=|V_0^+|e^{-\alpha x}\cos(\omega t - \beta x + \phi^+) \\
+      & \ \ +|V_0^-|e^{\alpha x}\cos(\omega t + \beta x + \phi^-)
+    \end{aligned}\]
+
+  \[\epsilon_{\text{r}} = \frac{\epsilon}{\epsilon_0}\]
+  \[c = \frac{1}{\sqrt{\mu_0 \epsilon_0}}\]
+  For coaxial, two-wire, parallel-plate:
+  \[u_p = \frac{c}{\sqrt{\epsilon_{\text{r}}}}\]
+  For microstrip:
+  \[u_p = \frac{c}{\sqrt{\epsilon_{\text{eff}}}}\]
+  \[R'=0 \ (\because\sigma_c=\infty); \]
+  \[G'=0 \ (\because\sigma=0); \]
+  \[C'=\frac{\sqrt{\epsilon_{\text{eff}}}}{Z_0c}; \]
+  \[L'=Z_0^2C';\]
+  \[\alpha=0 \ (\because R'=G'=0);\]
+  \[\beta = \frac{\omega}{c}\sqrt{\epsilon_{\text{eff}}}. \]
+  For all TEM lines:
+  \[\label{eq:allTemLC}L'C'=\mu\epsilon\]
+  \[\frac{G'}{C'}=\frac{\sigma}{\epsilon}\]
+  
+  \subsection{Lossless Line}
+  \[R' \ll \omega L'; \ G' \ll \omega C' \to R'=G'\approx 0 \to\]
+  \[\label{eq:gammaLossless}\gamma=\alpha+j\beta=j\omega\sqrt{L'C'}\]
+  From equation \eqref{eq:characterImpedance},
+  \[Z_0=\sqrt{\frac{L'}{C'}}\]
+  From equations \eqref{eq:phaseConstLambda}/\eqref{eq:phaseVelocity} and \eqref{eq:gammaLossless}
+  \[\label{eq:lambdaLossless}\lambda=\frac{2\pi}{\beta}=\frac{2\pi}{\omega\sqrt{L'C'}}\]
+  \[\label{eq:phaseVelocityLosslessLC}u_p=\frac{\omega}{\beta}=\frac{1}{\sqrt{L'C'}}\]
+  From equation \eqref{eq:allTemLC}, \eqref{eq:gammaLossless} and \eqref{eq:phaseVelocityLosslessLC}
+  \[\beta=\omega\sqrt{\mu\epsilon}\]
+  \[u_p=\frac{1}{\sqrt{\mu\epsilon}}\]
+  \section{Notes}
+
+  Fundamental Properties of EM waves:
+  \begin{itemize}[nosep]
+  \item A \textit{monochromatic} (single frequency) EM wave
+    consists of electric and magnetic fields that oscillate at the
+    same frequency $f$.
+  \item The phase velocity of an EM wave in a vacuum is the speed
+    of light, $c$.
+  \item In vacuum, the wavelength of an EM wave is related to its
+    oscillation frequency $f$ by $\lambda = \frac{c}{f}$.
+  \end{itemize}
+
+  \begin{itemize}
+  \item For passive transmission lines, $\alpha$ is either zero or
+    positive. The gain region of a laser is an example of an active
+    transmission line with a negative $\alpha$.
+  \item Microstrip line is considered a \textit{quasi-TEM} because
+    $\mathbf{E}$ and $\mathbf{F}$ are not everywhere perfectly
+    orthogonal.
+  \item From equation \eqref{eq:instantVoltage}, or a similar
+    equation, the term $...e^{-j\beta x}$ is the \textbf{incident
+      wave} (travelling from source to load, or in the positive x
+    direction). The term $...e^{j\beta x}$ is the \textbf{reflected
+      wave} (travelling from load to source, or in the negative x
+    direction).
+  \end{itemize}
+
+  %\includegraphics[width=\linewidth]{inputImpedance}
+  %\includegraphics[width=\linewidth]{voltageStandingWave}
+  %\includegraphics[width=\linewidth]{voltReflectionComplex}
+  %\includegraphics[width=\linewidth]{voltPlus}
+  %\includegraphics[width=\linewidth]{tanForZ}  
+\end{multicols*}
+\end{document}
